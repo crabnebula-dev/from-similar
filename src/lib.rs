@@ -96,7 +96,6 @@
 //! let data: SealedData = data.into();
 //! ```
 
-
 extern crate proc_macro;
 use proc_macro::TokenStream;
 use syn::{parse_macro_input, DeriveInput};
@@ -104,20 +103,20 @@ use syn::{parse_macro_input, DeriveInput};
 mod from_similar;
 
 /// [`FromSimilar`] derive macro.
-/// 
+///
 /// Typical usage means adding the Derive macro, setting the source with
 /// `#[from(SourceType)]` and using field macros as needed.
-/// 
+///
 /// - `#[use_into]` for types that need direct `into` calls.
 /// - `#[use_into_option]` for `Option<T>` types that need a map-into.
 /// - `#[use_into_collection]` for `impl IntoIterator<T>` types that should map each item and collect.
 #[proc_macro_derive(
-    FromSimilar,
-    attributes(from, use_into, use_into_option, use_into_collection)
+	FromSimilar,
+	attributes(from, use_into, use_into_option, use_into_collection)
 )]
 pub fn from_similar(input: TokenStream) -> TokenStream {
-    let ty = parse_macro_input!(input as DeriveInput);
-    from_similar::expand_from_similar(ty)
-        .unwrap_or_else(syn::Error::into_compile_error)
-        .into()
+	let ty = parse_macro_input!(input as DeriveInput);
+	from_similar::expand_from_similar(ty)
+		.unwrap_or_else(syn::Error::into_compile_error)
+		.into()
 }

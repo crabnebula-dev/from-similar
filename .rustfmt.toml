@@ -1,0 +1,2 @@
+# https://rust-lang.github.io/rustfmt/?version=v1.5.2&search=hard_tabs#hard_tabs
+hard_tabs = true
