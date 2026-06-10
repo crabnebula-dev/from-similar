@@ -1,0 +1,5 @@
+error: Bidirectional parameter is already defined
+ --> tests/compile_fail/defined_bidirectional_twice.rs:7:37
+  |
+7 | #[from(UnitA, bidirectional = true, bidirectional = false)]
+  |                                     ^^^^^^^^^^^^^^^

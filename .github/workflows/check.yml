@@ -1,0 +1,88 @@
+name: Check
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/check.yml"
+      - "Cargo.lock"
+      - "**/*.rs"
+      - "**/Cargo.toml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/check.yml"
+      - "Cargo.lock"
+      - "**/*.rs"
+      - "**/Cargo.toml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  RUST_BACKTRACE: 1
+
+permissions:
+  contents: read
+
+jobs:
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+          components: clippy
+          cache: true
+      - name: clippy
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+          components: rustfmt
+          cache: false
+      - name: Check formatting
+        run: cargo fmt --check
+
+  test-msrv:
+    name: Test MSRV Rust
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - id: msrv
+        name: Find out the MSRV from Cargo.toml
+        if: ${{ matrix.rust == 'msrv' }}
+        run: |
+          msrv=$(yq -e '.package.rust-version' ./Cargo.toml);
+          echo "msrv=$msrv" >> "$GITHUB_OUTPUT"
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: ${{ steps.msrv.outputs.msrv }}
+          cache: true
+      - name: cargo test
+        run: cargo test --workspace --all-targets --no-fail-fast
+      - name: cargo test (doc-tests)
+        run: cargo test --workspace --doc --no-fail-fast
+
+  test-stable:
+    name: Test stable Rust
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+          cache: true
+      - name: cargo test
+        run: cargo test --workspace --all-targets --no-fail-fast
+      - name: cargo test (doc-tests)
+        run: cargo test --workspace --doc --no-fail-fast

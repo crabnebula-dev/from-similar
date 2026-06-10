@@ -1,0 +1,7 @@
+error: proc-macro derive panicked
+ --> tests/compile_fail/missing_from_input.rs:5:10
+  |
+5 | #[derive(FromSimilar)]
+  |          ^^^^^^^^^^^
+  |
+  = help: message: #[from()] missing required input type argument, either as `input = T` or `T`

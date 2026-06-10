@@ -1,0 +1,18 @@
+error: #[derive(FromSimilar)] currently doesn't support generics on the deriving type, but limited support on the input type exists `#[from(input = SomeType<String>)]`
+ --> tests/compile_fail/unsupported_generics_self.rs:9:14
+  |
+9 | struct NamedB<S> {
+  |              ^^^
+
+error[E0277]: the trait bound `NamedB<String>: From<NamedA>` is not satisfied
+  --> tests/compile_fail/unsupported_generics_self.rs:18:29
+   |
+18 |     let _b: NamedB<String> = a.into();
+   |                                ^^^^ unsatisfied trait bound
+   |
+help: the trait `From<NamedA>` is not implemented for `NamedB<String>`
+  --> tests/compile_fail/unsupported_generics_self.rs:9:1
+   |
+ 9 | struct NamedB<S> {
+   | ^^^^^^^^^^^^^^^^
+   = note: required for `NamedA` to implement `Into<NamedB<String>>`

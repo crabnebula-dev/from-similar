@@ -1,0 +1,5 @@
+error: #[derive(FromSimilar)] only supports converting between structs
+ --> tests/compile_fail/unsupported_enums.rs:4:6
+  |
+4 | enum Example {
+  |      ^^^^^^^

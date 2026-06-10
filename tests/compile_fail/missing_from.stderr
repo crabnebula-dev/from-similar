@@ -1,0 +1,5 @@
+error: #[derive(FromSimilar)] requires a #[from()] attribute
+ --> tests/compile_fail/missing_from.rs:7:8
+  |
+7 | struct UnitB;
+  |        ^^^^^

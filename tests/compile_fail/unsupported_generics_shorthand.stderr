@@ -1,0 +1,5 @@
+error: Unsupported generic arguments in the shorthand form. Try using `#[from(input = NamedA<'_>)]` instead.
+ --> tests/compile_fail/unsupported_generics_shorthand.rs:9:1
+  |
+9 | #[from(NamedA<'_>)]
+  | ^^^^^^^^^^^^^^^^^^^

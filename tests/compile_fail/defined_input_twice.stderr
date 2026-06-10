@@ -1,0 +1,5 @@
+error: Input type is already defined
+ --> tests/compile_fail/defined_input_twice.rs:7:15
+  |
+7 | #[from(UnitA, input = UnitA)]
+  |               ^^^^^^^

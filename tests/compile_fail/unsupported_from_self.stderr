@@ -1,0 +1,9 @@
+error[E0119]: conflicting implementations of trait `From<SomeUnit>` for type `SomeUnit`
+ --> tests/compile_fail/unsupported_from_self.rs:3:10
+  |
+3 | #[derive(FromSimilar)]
+  |          ^^^^^^^^^^^
+  |
+  = note: conflicting implementation in crate `core`:
+          - impl<T> From<T> for T;
+  = note: this error originates in the derive macro `FromSimilar` (in Nightly builds, run with -Z macro-backtrace for more info)
