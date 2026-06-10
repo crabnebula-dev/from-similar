@@ -64,7 +64,7 @@ jobs:
           cache: true
       - run: cargo install cargo-doc2readme
       - name: check readme is up-to-date
-        run: cargo doc2readme --template README.tpl --expand-macros --check
+        run: cargo doc2readme --expand-macros --check
 
   test-msrv:
     name: Test MSRV Rust
