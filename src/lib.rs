@@ -22,7 +22,9 @@
 //! ### Field attributes
 //!
 //! `#[use_into]` is an optional *field attribute* to use `.into()` when converting this field.
+//!
 //! `#[use_into_option]` for `Option<T>` types that need a `.map(Into::into)` when converting this field.
+//!
 //! `#[use_into_collection]` for `impl IntoIterator<T>` types that should map each item and collect.
 //!
 //! ## Example with database models
