@@ -6,12 +6,16 @@ on:
       - main
 
 permissions:
+  # required for oidc token
+  id-token: write
+  # required to create the GitHub Release
   contents: write
+  # required for creating the Version Packages Release
+  pull-requests: write
 
 jobs:
   version-or-publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 65
     outputs:
       change: ${{ steps.covector.outputs.change }}
       commandRan: ${{ steps.covector.outputs.commandRan }}
@@ -39,11 +43,12 @@ jobs:
           recognizeContributors: true
       - name: Create Pull Request With Versions Bumped
         id: cpr
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v8
         if: steps.covector.outputs.commandRan == 'version'
         with:
-          title: "Publish New Versions"
-          commit-message: "publish new versions"
-          labels: "version updates"
-          branch: "release"
+          title: 'Publish New Versions (${{ github.ref_name }})'
+          commit-message: 'publish new versions'
+          labels: 'version updates'
+          branch: 'ci/release-${{ github.ref_name }}'
           body: ${{ steps.covector.outputs.change }}
+          sign-commits: true
