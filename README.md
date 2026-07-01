@@ -1,4 +1,4 @@
-# from-similar ![License: Apache-2.0 OR MIT](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue) [![from-similar on crates.io](https://img.shields.io/crates/v/from-similar)](https://crates.io/crates/from-similar) [![from-similar on docs.rs](https://docs.rs/from-similar/badge.svg)](https://docs.rs/from-similar) [![Rust Version: 1.71.1](https://img.shields.io/badge/rustc-1.71.1-orange.svg)](https://github.com/rust-lang/rust/releases/tag/1.71.1)
+# from-similar ![License: Apache-2.0 OR MIT](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue) [![from-similar on crates.io](https://img.shields.io/crates/v/from-similar)](https://crates.io/crates/from-similar) [![from-similar on docs.rs](https://docs.rs/from-similar/badge.svg)](https://docs.rs/from-similar) [![Source Code Repository](https://img.shields.io/badge/Code-On%20GitHub-blue?logo=GitHub)](https://github.com/crabnebula-dev/from-similar) [![Rust Version: 1.71.1](https://img.shields.io/badge/rustc-1.71.1-orange.svg)](https://github.com/rust-lang/rust/releases/tag/1.71.1)
 
 `FromSimilar` automatically implements [`From`][__link0] between two structs that are “similar”.
 
