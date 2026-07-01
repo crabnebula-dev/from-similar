@@ -1,0 +1,21 @@
+{
+  "gitSiteUrl": "https://github.com/crabnebula-dev/from-similar/",
+  "pkgManagers": {
+    "rust": {
+      "version": true,
+      "getPublishedVersion": {
+        "use": "fetch:check",
+        "options": {
+          "url": "https://crates.io/api/v1/crates/${ pkg.pkgFile.pkg.package.name }/${ pkg.pkgFile.version }"
+        }
+      },
+      "publish": ["cargo publish"]
+    }
+  },
+  "packages": {
+    "from-similar": {
+      "path": "./",
+      "manager": "rust"
+    }
+  }
+}
