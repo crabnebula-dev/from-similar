@@ -1,6 +1,7 @@
 [package]
 name = "from-similar"
 description = "Automatically implements `From` between two structs that are similar."
+repository = "https://github.com/crabnebula-dev/from-similar"
 authors = ["CrabNebula Ltd."]
 license = "Apache-2.0 OR MIT"
 version = "1.0.0"
