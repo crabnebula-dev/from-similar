@@ -20,7 +20,9 @@ Will generate `impl From<InputType> for T` and `impl From<T> for InputType`.
 
 #### Field attributes
 
-`#[use_into]` is an optional *field attribute* to note that `.into()` should be called when converting this field.
+`#[use_into]` is an optional *field attribute* to use `.into()` when converting this field.
+`#[use_into_option]` for `Option<T>` types that need a `.map(Into::into)` when converting this field.
+`#[use_into_collection]` for `impl IntoIterator<T>` types that should map each item and collect.
 
 ### Example with database models
 
@@ -33,6 +35,8 @@ use from_similar::FromSimilar;
 struct NormalModel {
     id: String,
     date: chrono::DateTime<chrono::Utc>,
+    date_option: Option<chrono::DateTime<chrono::Utc>>,
+    date_list: Vec<chrono::DateTime<chrono::Utc>>,
 }
 
 #[derive(FromSimilar, serde::Serialize, serde::Deserialize)]
@@ -43,6 +47,12 @@ struct DatabaseModel {
 
     #[use_into]
     date: bson::DateTime,
+
+    #[use_into_option]
+    date_option: Option<bson::DateTime>,
+
+    #[use_into_collection]
+    date_list: Vec<bson::DateTime>,
 }
 
 let normal = NormalModel::default();
