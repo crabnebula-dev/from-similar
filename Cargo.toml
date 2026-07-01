@@ -4,7 +4,7 @@ description = "Automatically implements `From` between two structs that are simi
 repository = "https://github.com/crabnebula-dev/from-similar"
 authors = ["CrabNebula Ltd."]
 license = "Apache-2.0 OR MIT"
-version = "1.0.0"
+version = "1.0.1"
 edition = "2021"
 rust-version = "1.71.1"
 
